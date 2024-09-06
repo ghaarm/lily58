@@ -12,6 +12,94 @@
     keymap {
         compatible = "zmk,keymap";
 
+// Makro-Definition hier:
+        a_alt_macro {
+            label = "Alt + A to ä or Alt + Shift + A to Ä";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                // Wenn nur Alt gedrückt wird
+                = <&macro_press   &kp LALT>  
+                , <&macro_tap     &kp U_UNICODE(0x00E4)>  // Unicode für kleines ä (Alt + A)
+                , <&macro_release &kp LALT>
+
+                // Wenn Alt + Shift gedrückt werden
+                , <&macro_press   &kp LALT &kp SHIFT>
+                , <&macro_tap     &kp U_UNICODE(0x00C4)>  // Unicode für großes Ä (Alt + Shift + A)
+                , <&macro_release &kp LALT &kp SHIFT>;
+        };
+
+        // Makro für Alt + U (ü) und Alt + Shift + U (Ü)
+        u_alt_macro {
+            label = "Alt + U to ü or Alt + Shift + U to Ü";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                // Wenn nur Alt gedrückt wird
+                = <&macro_press   &kp LALT>  
+                , <&macro_tap     &kp U_UNICODE(0x00FC)>  // Unicode für kleines ü (Alt + U)
+                , <&macro_release &kp LALT>
+
+                // Wenn Alt + Shift gedrückt werden
+                , <&macro_press   &kp LALT &kp SHIFT>
+                , <&macro_tap     &kp U_UNICODE(0x00DC)>  // Unicode für großes Ü (Alt + Shift + U)
+                , <&macro_release &kp LALT &kp SHIFT>;
+        };
+
+        // Makro für Alt + O (ö) und Alt + Shift + O (Ö)
+        o_alt_macro {
+            label = "Alt + O to ö or Alt + Shift + O to Ö";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                // Wenn nur Alt gedrückt wird
+                = <&macro_press   &kp LALT>  
+                , <&macro_tap     &kp U_UNICODE(0x00F6)>  // Unicode für kleines ö (Alt + O)
+                , <&macro_release &kp LALT>
+
+                // Wenn Alt + Shift gedrückt werden
+                , <&macro_press   &kp LALT &kp SHIFT>
+                , <&macro_tap     &kp U_UNICODE(0x00D6)>  // Unicode für großes Ö (Alt + Shift + O)
+                , <&macro_release &kp LALT &kp SHIFT>;
+        };
+
+        // Makro für Alt + S (ß) und Alt + Shift + S (ẞ)
+        s_alt_macro {
+            label = "Alt + S to ß or Alt + Shift + S to ẞ";
+            compatible = "zmk,behavior-macro";
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                // Wenn nur Alt gedrückt wird
+                = <&macro_press   &kp LALT>  
+                , <&macro_tap     &kp U_UNICODE(0x00DF)>  // Unicode für ß (Alt + S)
+                , <&macro_release &kp LALT>
+
+                // Wenn Alt + Shift gedrückt werden
+                , <&macro_press   &kp LALT &kp SHIFT>
+                , <&macro_tap     &kp U_UNICODE(0x1E9E)>  // Unicode für großes ẞ (Alt + Shift + S)
+                , <&macro_release &kp LALT &kp SHIFT>;
+        };
+
+        // Layer-Definitionen kommen hier:
+        default_layer {
+            bindings = <
+                &kp LCTRL   &a_alt_macro   &kp R   &kp S     &kp T         &kp G  // Makro für A (Alt + A und Alt + Shift + A)
+                &kp LSHFT   &kp Z          &kp X   &kp C     &kp D         &kp V   // Z bleibt unverändert
+
+                &kp TAB     &kp Q          &kp W   &kp F     &kp P         &kp B  // Erste Zeile
+                &kp LCTRL   &u_alt_macro   &o_alt_macro   &s_alt_macro    // Makros für Ü, Ö und ß
+                // Weitere Key-Bindings hier
+            >;
+        };
+
+        // Weitere Layer-Definitionen hier...
+    };
+};
+
         default_layer {
             // ------------------------------------------------------------------------------------------------------------
             // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7    |  8    |  9   |   0   |   `   |
